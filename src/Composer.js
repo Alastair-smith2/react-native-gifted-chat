@@ -8,6 +8,7 @@ import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant';
 import Color from './Color';
 
 export default class Composer extends React.Component {
+  textInputValue = null
 
   onContentSizeChange(e) {
     const { contentSize } = e.nativeEvent;
@@ -25,7 +26,8 @@ export default class Composer extends React.Component {
     }
   }
 
-  onChangeText(text) {
+  onChangeText = (text) => {
+    this.textInputValue = text
     this.props.onTextChanged(text);
   }
 
@@ -40,7 +42,7 @@ export default class Composer extends React.Component {
         multiline={this.props.multiline}
         onChange={(e) => this.onContentSizeChange(e)}
         onContentSizeChange={(e) => this.onContentSizeChange(e)}
-        onChangeText={(text) => this.onChangeText(text)}
+        onChangeText={this.onChangeText}
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
         autoFocus={this.props.textInputAutoFocus}
         value={this.props.text}
